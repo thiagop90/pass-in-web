@@ -124,7 +124,7 @@ export const attendeeTableColumns = (
             </Badge>
           ) : (
             <TooltipProvider>
-              <Tooltip>
+              <Tooltip delayDuration={0}>
                 <TooltipTrigger>
                   <Badge variant="success">
                     {t('ATTENDEES.REALIZED_CHECK_IN')}
