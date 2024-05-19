@@ -23,6 +23,12 @@
       --border: 12 6.5% 15.1%;
       --input: 12 6.5% 15.1%;
       --ring: 22 88% 65%;
+      --success-bg: 150 100% 6%;
+      --success-border: 147 100% 12%;
+      --success-text: 150 86% 65%;
+      --warning-bg: 64 100% 6%;
+      --warning-border: 60 100% 12%;
+      --warning-text: 46 87% 65%;
       --radius: 0.625rem;
     }
   }

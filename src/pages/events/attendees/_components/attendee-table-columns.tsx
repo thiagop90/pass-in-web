@@ -7,6 +7,7 @@ import { t } from 'i18next'
 import { ChevronsUpDown, Clipboard, MoreHorizontal } from 'lucide-react'
 import { toast } from 'sonner'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -17,6 +18,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import i18n from '@/language'
 
 import { AttendeeCheckIn } from './attendee-check-in'
@@ -104,7 +111,7 @@ export const attendeeTableColumns = (
   {
     accessorKey: 'checkedInAt',
     header: () => (
-      <div className="text-right">{t('ATTENDEES.DATE_OF_CHECK_IN')}</div>
+      <div className="text-right">{t('ATTENDEES.STATUS_OF_CHECK_IN')}</div>
     ),
     cell: ({ row }) => {
       const checkedIn = row.original.checkedInAt
@@ -112,13 +119,24 @@ export const attendeeTableColumns = (
       return (
         <div className="text-right font-medium">
           {checkedIn === null ? (
-            <p className="text-muted-foreground">
-              {t('ATTENDEES.DID_NOT_CHECK_IN')}
-            </p>
+            <Badge variant="warning">
+              {t('ATTENDEES.UNREALIZED_CHECK_IN')}
+            </Badge>
           ) : (
-            dayjs()
-              .locale(i18n.language === 'en' ? enUS : ptBR)
-              .to(row.getValue('checkedInAt'))
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Badge variant="success">
+                    {t('ATTENDEES.REALIZED_CHECK_IN')}
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {dayjs()
+                    .locale(i18n.language === 'en' ? enUS : ptBR)
+                    .to(row.getValue('checkedInAt'))}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
       )

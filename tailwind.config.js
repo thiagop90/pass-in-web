@@ -26,6 +26,12 @@ module.exports = {
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        'success-bg': 'hsl(var(--success-bg))',
+        'success-border': 'hsl(var(--success-border))',
+        'success-text': 'hsl(var(--success-text))',
+        'warning-bg': 'hsl(var(--warning-bg))',
+        'warning-border': 'hsl(var(--warning-border))',
+        'warning-text': 'hsl(var(--warning-text))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
