@@ -10,7 +10,10 @@ import { Label } from '@/components/ui/label'
 import { EventCreateSchema } from './event-create-dialog'
 
 export function EventCounterInput() {
-  const { register } = useFormContext<EventCreateSchema>()
+  const {
+    register,
+    formState: { isSubmitting },
+  } = useFormContext<EventCreateSchema>()
   const inputRef = useRef<HTMLInputElement | null>(null)
   const { ref, ...rest } = register('maximumAttendees')
   const [maximumAttendees, setMaximumAttendees] = useState(1)
@@ -43,9 +46,8 @@ export function EventCounterInput() {
 
       <div className="relative flex items-center">
         <IconButton
-          type="button"
           onClick={decreaseAttendees}
-          disabled={maximumAttendees <= 1}
+          disabled={maximumAttendees <= 1 || isSubmitting}
           className="absolute left-1 z-10 rounded-sm active:scale-[.98]"
         >
           <Minus className="size-4 text-primary" />
@@ -60,11 +62,12 @@ export function EventCounterInput() {
           value={maximumAttendees}
           onChange={handleChangeMaximumAttendees}
           className="text-center"
+          disabled={isSubmitting}
         />
         <IconButton
-          type="button"
           onClick={increaseAttendees}
           className="absolute right-1 z-10 rounded-sm active:scale-[.98]"
+          disabled={isSubmitting}
         >
           <Plus className="size-4 text-primary" />
         </IconButton>

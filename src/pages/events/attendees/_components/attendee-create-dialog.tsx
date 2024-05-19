@@ -113,6 +113,7 @@ export function AttendeeRegisterDialog({
                 id="name"
                 placeholder={t('ATTENDEES.NAME_PLACEHOLDER')}
                 {...register('name')}
+                disabled={isSubmitting}
               />
               <p className="text-xs text-muted-foreground">
                 {t('ATTENDEES.NAME_REQUIRED')}
@@ -125,6 +126,7 @@ export function AttendeeRegisterDialog({
                 id="email"
                 placeholder={t('ATTENDEES.EMAIL_PLACEHOLDER')}
                 {...register('email')}
+                disabled={isSubmitting}
               />
             </div>
           </div>

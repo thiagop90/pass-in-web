@@ -100,11 +100,13 @@ export function EventCreateDialog() {
                     id="title"
                     placeholder={t('EVENT.TITLE_PLACEHOLDER')}
                     {...register('title')}
+                    disabled={isSubmitting}
                   />
                   <p className="text-xs text-muted-foreground">
                     {t('EVENT.TITLE_REQUIRED')}
                   </p>
                 </div>
+
                 <EventCounterInput />
               </div>
 
@@ -114,6 +116,7 @@ export function EventCreateDialog() {
                   id="details"
                   placeholder={t('EVENT.DETAILS_PLACEHOLDER')}
                   {...register('details')}
+                  disabled={isSubmitting}
                 />
               </div>
             </div>
