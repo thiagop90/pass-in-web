@@ -19,11 +19,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from '@/components/ui/hover-card'
 import i18n from '@/language'
 
 import { AttendeeCheckIn } from './attendee-check-in'
@@ -123,20 +122,18 @@ export const attendeeTableColumns = (
               {t('ATTENDEES.UNREALIZED_CHECK_IN')}
             </Badge>
           ) : (
-            <TooltipProvider>
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger>
-                  <Badge variant="success">
-                    {t('ATTENDEES.REALIZED_CHECK_IN')}
-                  </Badge>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {dayjs()
-                    .locale(i18n.language === 'en' ? enUS : ptBR)
-                    .to(row.getValue('checkedInAt'))}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <HoverCard openDelay={0}>
+              <HoverCardTrigger>
+                <Badge variant="success">
+                  {t('ATTENDEES.REALIZED_CHECK_IN')}
+                </Badge>
+              </HoverCardTrigger>
+              <HoverCardContent align="end">
+                {dayjs()
+                  .locale(i18n.language === 'en' ? enUS : ptBR)
+                  .to(row.getValue('checkedInAt'))}
+              </HoverCardContent>
+            </HoverCard>
           )}
         </div>
       )
@@ -153,7 +150,7 @@ export const attendeeTableColumns = (
         toast(
           <>
             <span>{t('ATTENDEES.TOAST_COPY_NAME')}:</span>
-            <span className="text-primary">{attendee.name}</span>
+            <span className="font-semibold text-primary">{attendee.name}</span>
           </>,
         )
       }
