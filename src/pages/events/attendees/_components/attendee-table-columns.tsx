@@ -19,10 +19,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from '@/components/ui/hover-card'
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import i18n from '@/language'
 
 import { AttendeeCheckIn } from './attendee-check-in'
@@ -113,27 +114,29 @@ export const attendeeTableColumns = (
       <div className="text-right">{t('ATTENDEES.STATUS_OF_CHECK_IN')}</div>
     ),
     cell: ({ row }) => {
-      const checkedIn = row.original.checkedInAt
+      const checkedInAt = row.original.checkedInAt
 
       return (
         <div className="text-right font-medium">
-          {checkedIn === null ? (
+          {checkedInAt === null ? (
             <Badge variant="warning">
               {t('ATTENDEES.UNREALIZED_CHECK_IN')}
             </Badge>
           ) : (
-            <HoverCard openDelay={0}>
-              <HoverCardTrigger>
-                <Badge variant="success">
-                  {t('ATTENDEES.REALIZED_CHECK_IN')}
-                </Badge>
-              </HoverCardTrigger>
-              <HoverCardContent align="end">
-                {dayjs()
-                  .locale(i18n.language === 'en' ? enUS : ptBR)
-                  .to(row.getValue('checkedInAt'))}
-              </HoverCardContent>
-            </HoverCard>
+            <TooltipProvider>
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger>
+                  <Badge variant="success">
+                    {t('ATTENDEES.REALIZED_CHECK_IN')}
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent align="end">
+                  {dayjs()
+                    .locale(i18n.language === 'en' ? enUS : ptBR)
+                    .to(row.getValue('checkedInAt'))}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           )}
         </div>
       )
